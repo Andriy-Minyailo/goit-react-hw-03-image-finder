@@ -62,7 +62,7 @@ export class App extends Component {
 
     return (
       <div className={css.container}>
-        <h2>Phonebook</h2>
+        {/* <h2>Phonebook</h2> */}
         <FormAddContacts addContact={this.addContact} />
         <h2>Contacts</h2>
         <Filter handleChange={this.handleChange} value={this.state.filter} />
