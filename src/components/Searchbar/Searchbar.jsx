@@ -7,12 +7,16 @@ export class Searchbar extends Component {
     input: '',
   };
   handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    this.setState({ [name]: value.trim() });
   };
   submitSearchImg = async evt => {
     evt.preventDefault();
+    if (!this.state.input) {
+      alert('Enter data to search!');
+      return;
+    }
     await this.props.resetState();
-    this.props.arraySearchImg(this.state.input.trim());
+    this.props.arraySearchImg(this.state.input);
     this.setState({ input: '' });
   };
   render() {
