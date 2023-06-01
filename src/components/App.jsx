@@ -22,7 +22,7 @@ export class App extends Component {
   };
 
   resetState = () => {
-    this.setState({ imgs: [], totalHits: 0, page: 1, value: '' });
+    this.setState({ imgs: [], totalHits: 0, page: 1, value: '', error: null });
   };
 
   arraySearchImg = async (value = this.state.value) => {
