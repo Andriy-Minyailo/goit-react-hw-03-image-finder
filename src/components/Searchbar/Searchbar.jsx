@@ -1,27 +1,45 @@
 import { Component } from 'react';
 import css from './Searchbar.module.css';
+import PropTypes from 'prop-types';
 
 export class Searchbar extends Component {
   state = {
-    value: '',
+    input: '',
+  };
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+  submitSearchImg = async evt => {
+    evt.preventDefault();
+    await this.props.resetState();
+    this.props.arraySearchImg(this.state.input.trim());
+    this.setState({ input: '' });
   };
   render() {
     return (
       <header className={css.searchbar}>
-        <form className={css.form}>
-          <button type="submit" className={css.button}>
-            <span className={css.button_label}>Search</span>
+        <form className={css.searchForm} onSubmit={this.submitSearchImg}>
+          <button type="submit" className={css.searchForm_button}>
+            <span className={css.searchForm_button_label}>Search</span>
           </button>
 
           <input
-            className={css.input}
+            className={css.searchForm_input}
             type="text"
-            // autocomplete="off"
-            // autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
+            onChange={this.handleChange}
+            value={this.state.input}
+            name="input"
           />
         </form>
       </header>
     );
   }
 }
+
+Searchbar.propTypes = {
+  arraySearchImg: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
+};
